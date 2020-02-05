@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{%  block content %}
+<style>
+table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+    }
+table tr td{
+    width:100px;
+ }
+</style>
+
+    <div style="height:auto; width:600px; margin:0px auto; ">
+        <form action="{% url 'create_post' %}" enctype="multipart/form-data" method="POST">
+            {% csrf_token %}
+            <table>
+                <tr>
+                    <td>Image</td>
+                    <td><input type="File" accept=".jpeg, .jpg, .jpe, .jfif, .jif, .png" name="image"></td>
+                </tr>
+                <tr>
+                    <td>Comment</td>
+                    <td><textarea name="comment"></textarea></td>
+                </tr>
+                <tr>
+                    <td colspan="2" align="center"><input type="submit" value="Create POST"></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+{% endblock %}

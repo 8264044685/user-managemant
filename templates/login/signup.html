@@ -1,0 +1,87 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<style type="text/css">
+    .errorlist{
+        color: red;
+        width: 200px;
+    }
+    .abc{
+        width: 600px;
+        height: auto;
+        margin: 0 auto
+    }
+    table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+</style>
+<div class="abc">
+  <h2>Sign up</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    <table>
+
+        {% for field in form %}
+        <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+            <td>
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+            
+            
+            
+         <tr>
+             <td>
+                 {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+             </td>
+         </tr>
+
+        {% endfor %}
+
+
+        
+
+        {% for field in userProfileForm %}
+        <tr>
+            <td>{{ field.label_tag }}</td>
+            <td>{{ field }}</td>
+            <td>
+                {% for error in field.errors %}
+                    <p style="color: red">{{ error }}</p>
+                {% endfor %}
+            </td>
+        </tr>
+            
+            
+            
+         <tr>
+             <td>
+                 {% if field.help_text %}
+                <small style="color: grey">{{ field.help_text }}</small>
+                {% endif %}
+             </td>
+         </tr>
+
+        {% endfor %}
+        <tr>
+            <td></td>
+            <td colspan="3" align="center"><button type="submit" id="submitSignup">Sign up</button></td>
+        </tr>
+    </table>
+      <div id="mobile_error_show"></div>
+  </form>
+</div>
+
+
+<script type="text/javascript">
+
+</script>
+{% endblock %}

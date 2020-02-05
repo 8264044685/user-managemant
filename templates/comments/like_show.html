@@ -1,0 +1,18 @@
+{% load humanize %}
+
+
+{% if likes %}
+{% for like in likes %}
+{{like.user.username}},
+<!--        <div class="container">-->
+<!--      <img src="{{like.user.userprofile.profilePicture.url}}"  style="width:100%;" />-->
+<!--      <p style="color:gray; font-family:Comic Sans, Comic Sans MS, cursive; font-size:25px;">{{like.user.username}}</p>-->
+
+<!--        <span class="text-right">{{post.messages}}</span>-->
+
+<!--      <span class="time-right">{{like.time | naturaltime}}</span>-->
+<!--    </div>-->
+{% endfor %}
+{% else %}
+<span style="color:red;" align="center"> Comment.</span>
+{% endif %}

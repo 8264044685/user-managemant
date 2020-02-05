@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+{% if posts  %}
+    <div style="width:auto;height:500px;">
+        <div style="width:400px;height:auto; background:white; float:left ">
+            <div style="width:200px; margin:50px auto;   height:200px; background:gray;">
+                Advertisment
+            </div>
+        </div>
+        <div style="width:400px;height:auto; background:white; float:left; ">
+            <div>
+
+
+
+                        {% for data in posts %}
+                <form  method="POST" class="user_comment_form" user-comment-url="{% url 'user_comment' %}" >
+                    {% csrf_token %}
+
+                            <input type="hidden" id="post_id" name="post_id" value="{{data.id}}">
+                            <input type="hidden" id="user_id" name="user_id" value="{{user_id}}">
+                            <div class="card" style="margin:10px;">
+                                <p align="left" style="font-size:30px; color:gray;">{{data.user}}</p>
+                                <div class="text" align="left" style="padding:0px auto; margin: 0 0 10px 10px; text-align: justify; text-indent: 50px;">{{data.content}}</div>
+                                <img width="300" height="200" src="{{data.image.url}} " alt="John" style="width:100%">
+
+
+                                <div align="left"><i class="fa fa-calendar" aria-hidden="true">Created At : {{data.timestamp }}</i></div>
+                                <div align="left"><i class="fa fa-calendar" aria-hidden="true">Updated At : {{data.updated | naturalday}}</i></div>
+                                    <div style="height=:50px; width:25px;">
+                                        <textarea id="user_comment_post" name="user_comment"></textarea>
+                                        <div style="width:200px ; color:red;" id="user_comment_post_error"></div>
+                                        <div style="width:200px; color:blue;" id="user_comment_post_success"></div>
+                                        <input class="btn btn-primary" type="submit" value="POST" id="submit_coment"></input>
+                                    </div>
+
+                                <p><a href="{% url 'show_post_comment' %}?id={{data.id}}" class="" id="show_all_comment"> Show Comments</a></p>
+                            </div>
+                      </form>
+                        {% endfor %}
+
+
+            </div>
+        </div>
+        <div style="width:400px;height:auto; background:white; float:left; ">
+           <div style="width:200px; margin:50px auto;   height:200px; background:gray;">
+                Advertisment
+            </div>
+        </div>
+
+
+    </div>
+{% else %}
+    <div style="color:red; font-size:30px;" align="center"> Post not created yet</div>
+{% endif %}
+
+
+{% endblock %}

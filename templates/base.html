@@ -1,0 +1,160 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}{% endblock %}</title>
+
+    <link rel="stylesheet" href="{% static '/css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+</head>
+<body>
+{% include 'partials/_menu.html' %}
+{% include 'partials/alerts.html' %}
+
+{% block content %}
+
+{% endblock %}
+</body>
+
+
+<script src="{% static 'js/jquery.min.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="{% static 'js/bootstrap.min.js' %}"></script>
+<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+
+<script>
+     $(document).ready(function() {
+         $('#example').DataTable({
+            columnDefs: [
+                { orderable: false, targets: [1,2,3,4,5,6,7] },
+                { searchable: false, targets: [1,2,3,4,5,6,7] },
+            ]
+         });
+        $(".user_comment_form").submit(function(){
+            var user_comment=$(this).find('#user_comment_post').val()
+            console.log("user_comment :",user_comment)
+            var post_id=$(this).find("#post_id").val()
+            console.log("post_id :",post_id)
+            var url = $(".user_comment_form").attr("user-comment-url");
+            console.log("url is ",url);
+            var csrf = $( "input[name$='csrfmiddlewaretoken']" ).val();
+            console.log("csrf ",csrf)
+            if (user_comment == ""){
+                $(this).find("#user_comment_post_error").html('Please fill the commentbox first').fadeOut(3000);
+                return false;
+            }
+            var success=$(this).find("#user_comment_post_success").html("Comment Posted successfully").fadeOut(3000);
+            var blank=$(this).find("#user_comment_post").val("");
+            $.ajax({
+                type:"POST",
+                url: url,
+                data: {
+                    'user_comment': user_comment,
+                    'post_id':post_id,
+                    'csrfmiddlewaretoken':csrf,
+                },
+                success: function (data) {
+                    console.log("sssss")
+                    data = success
+                    data = blank
+                }
+            });
+            return false;
+         });
+
+
+
+     });
+      function comment_like(ele,comment_id,post_id){
+
+        var url = $(ele).data('like-url')
+        console.log("url :",url)
+        var csrf = $( "input[name$='csrfmiddlewaretoken']" ).val();
+        console.log("csrf :",csrf)
+        var comment_id = comment_id
+        console.log("comment_id :",comment_id)
+        var post_id = post_id
+        console.log("post_id :",post_id)
+
+       $.ajax({
+                url: url,
+                type:'post',
+                data: {
+                    'comment_id': comment_id,
+                    'post_id':post_id,
+                    'csrfmiddlewaretoken':csrf,
+                },
+                success: function (data) {
+
+                    $("#show_comment_"+comment_id).html(data);
+
+                }
+            });
+
+     }
+<!--$(document).on('click','.post_like',function(){-->
+<!--    console.log($(this).attr('post-id'));-->
+<!--    console.log($(this).attr('user-id'));-->
+<!--});-->
+<!--$('.post_like').click(function(){-->
+<!--    console.log($(this).attr('post-id'));-->
+<!--    console.log($(this).attr('user-id'));-->
+<!--});-->
+
+<!--    $(document).on('mouseover','.post_like',function(){-->
+<!--        &lt;!&ndash;console.log($(this).attr('post-id'));&ndash;&gt;-->
+<!--        var post_id = $(this).attr('post-id')-->
+<!--        var url = $(this).attr('like-show-url')-->
+<!--        $.ajax({-->
+<!--                url: url,-->
+<!--                data: {-->
+<!--                    'post_id': post_id,-->
+<!--                },-->
+<!--                success: function (data) {-->
+<!--                    $("#toggle_like_"+post_id).html(data)-->
+<!--                }-->
+<!--            });-->
+<!--    });-->
+
+<!--    $(document).on('mouseout','.post_like',function(){-->
+<!--        &lt;!&ndash;console.log($(this).attr('post-id'));&ndash;&gt;-->
+<!--        var post_id = $(this).attr('post-id')-->
+<!--        var url = $(this).attr('like-show-url')-->
+<!--        $.ajax({-->
+<!--                url: url,-->
+<!--                data: {-->
+<!--                    'post_id': post_id,-->
+<!--                },-->
+<!--                success: function (data) {-->
+<!--                    $("#toggle_like_"+post_id).html("")-->
+<!--                }-->
+<!--            });-->
+<!--    });-->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>
+</html>

@@ -1,0 +1,66 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load humanize %}
+
+{% block content %}
+{% if post_data  %}
+<div style="width:auto;height:500px;">
+    <div style="width:400px;height:auto; background:white; float:left ">
+        <div style="width:200px; margin:50px auto;   height:200px; background:gray;">
+            Advertisment
+        </div>
+    </div>
+    <div style="width:400px;height:auto; background:white; float:left; ">
+        <div>
+            <form action="{% url 'user_comment' %}" method="POST">
+                {% csrf_token %}
+
+
+                {% for data in post_data %}
+                <input type="hidden" name="comment_id" value="{{data.id}}">
+                <div class="card" style="margin:10px;">
+                    <p align="left" style="font-size:30px; color:gray;">{{data.user}}</p>
+                    <div class="text" align="left"
+                         style="padding:0px auto; margin: 0 0 10px 10px; text-align: justify; text-indent: 50px;">
+                        {{data.content}}
+                    </div>
+                    <img width="300" height="200" src="{{data.image.url}} " alt="John" style="width:100%">
+
+                    <div align="left">
+
+                        <a href="#"> <i class="fa fa-thumbs-o-up fa-2x"></i></a><span style="color:red;"></span>
+
+                        <a href="#"> <i class="fa fa-thumbs-o-down fa-2x" style="margin:0 0 0 100px"></i></a><span
+                            style="color:red;"></span>
+                    </div>
+                    <div align="left"><i class="fa fa-calendar" aria-hidden="true">Created At : {{data.timestamp }}</i>
+                    </div>
+                    <div align="left"><i class="fa fa-calendar" aria-hidden="true">Updated At : {{data.updated |
+                        naturalday}}</i></div>
+
+                    <!--                                    <div style="height=:50px; width:25px;">-->
+                    <!--                                        <textarea name="user_comment"></textarea>-->
+                    <!--                                        <input class="btn btn-primary" type="submit" value="POST" id="submit_coment"></input>-->
+                    <!--                                    </div>-->
+
+
+                    <p><a href="{% url 'show_post_comment' %}?id={{data.id}}" id="show_all_comment"> Show Comments</a>
+                    </p>
+                </div>
+                {% endfor %}
+
+            </form>
+        </div>
+    </div>
+    <div style="width:400px;height:auto; background:white; float:left; ">
+        <div style="width:200px; margin:50px auto;   height:200px; background:gray;">
+            Advertisment
+        </div>
+    </div>
+
+
+</div>
+{% else %}
+<div style="color:red; font-size:30px;" align="center"> Post not created yet</div>
+{% endif %}
+{% endblock %}

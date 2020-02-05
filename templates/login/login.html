@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Login{% endblock %}
+{% block content %}
+
+<style>
+    table {
+    border-collapse: separate;
+    border-spacing: 0 1em;
+}
+</style>
+<form action="{% url 'login' %}" method="POST">
+    {% csrf_token %}
+
+    <div style="height :auto; width :500px; margin : 0px auto;">
+        <table>
+            <tr>
+                <td>name</td>
+                <td><input type="text" name='username' style="width : 250px; height:30px;" placeholder="Enter Your Username"> </td>
+            </tr>
+
+            <tr>
+                <td>password</td>
+                <td><input type="password" name="password" style="width : 250px; height:30px;" placeholder="Enter Your Password"></td>
+            </tr>
+            <tr>
+                <td colspan="2" align="right"><a href="{% url 'password_reset' %}" style="text-decoration:none; color:red;">Forgot Password</a></td>
+            </tr>
+            <tr>
+
+                <td colspan="2" align="center"><input type="submit" value="Login"></td>
+            </tr>
+        </table>
+    </div>
+</form>
+{% endblock %}

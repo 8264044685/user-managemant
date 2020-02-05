@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load humanize %}
+
+{% for comment in post_comment_detail.comments %}
+<form method="post">
+    {% csrf_token %}
+    <div class="container" id="contains_{{comment.comment_id}}">
+        <!--        <img src=""  style="width:100%;" /><span>{{comment.user.username}}</span>-->
+        <p style="color:gray; font-family:Comic Sans, Comic Sans MS, cursive; font-size:25px;">
+            <span class="text-right">{{comment.user.username}}</span>
+        </p>
+        <br>
+
+        <span class="text-right">{{comment.messages}}</span>
+        <div>
+          <span class="text-right" style="color: gray;">
+            <a href="javascript:void(0)" data-like-url="{% url 'comment_like' %}" like-show-url="{% url 'like_show' %}"
+               class="comment_like" onclick="comment_like(this,{{comment.comment_id}},{{post_id}});"
+               comment-id="{{comment.comment_id}}" post-id="{{post_id}}">
+              <i class="fa fa-thumbs-o-up fa-2x"></i>
+            </a>
+            <span style="color:red;" id="show_comment_{{comment.comment_id}}">{{comment.no_of_like}}</span> <span
+                  data-toggle="tooltip"
+                  id="toggle_like_{{comment.comment_id}}"></span>
+          </span>
+            <span class="pull-right " style="color: gray;">{{comment.time | naturaltime}}</span>
+        </div>
+
+    </div>
+</form>
+{% endfor %}
+{% endblock %}
+
+
+
