@@ -146,7 +146,26 @@ MESSAGE_TAGS = {
 
 
 
-try:
-    from .local_settings import *
-except ImportError:
-    pass
+# try:
+#     from .local_settings import *
+# except ImportError:
+#     pass
+
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'parasdabhi2021@gmail.com'
+EMAIL_HOST_PASSWORD = 'Paras@175690693009'
+DEFAULT_FROM_EMAIL = 'Coding with pass team'
+
+
+
+
+# AWS_ACCESS_KEY_ID = 'AKIASADX6ET67G7DH2EV'
+# AWS_SECRET_ACCESS_KEY = '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'
+# AWS_STORAGE_BUCKET_NAME = 'django-user-management-system'
+# AWS_S3_FILE_OVERWRITE = False
+# AWS_DEFAULT_ACL = None
+# DEFAULT_FILE_STORAGE = 'checkstatic.storage_backends.MediaStorage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# AWS_LOCATION = 'static'

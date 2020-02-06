@@ -66,7 +66,7 @@ def logout_view(request):
 def reset_password_view(request):
     if request.method == 'POST':
         email = request.POST['email']
-        admin_email = 'parasdabhi1996@gmail.com'
+        admin_email = 'parasdabhi2021@gmail.com'
 
         if email == None or email == "":
             messages.error(request, email)
