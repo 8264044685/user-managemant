@@ -93,7 +93,7 @@ def comment_like(request):
                         comment_update = comment.objects.filter(comment_id=comment_id)
                         for data in comment_update:
                             comment_id = data.comment_id
-                            no_of_like = int(data.no_of_like)
+                            no_of_like = data.no_of_like
                         print("comment id is ", comment_id)
                         print("no of like  is ", type(no_of_like))
                         no_of_like = no_of_like - 1
@@ -109,7 +109,7 @@ def comment_like(request):
                         print("comment id is ", comment_id)
                         print("no of like  is ", type(no_of_like))
                         no_of_like = no_of_like + 1
-                        comment.objects.filter(comment_id=comment_id).update(no_of_like=no_of_like)
+                        comment.objects.filter(comment_id=comment_id).update(no_of_like=str(no_of_like))
 
                         lokeObj = like.objects.create(user=userObj, comment_id=comment_id)
                         likelist = []
