@@ -94,6 +94,7 @@ def comment_like(request):
                         for data in comment_update:
                             comment_id = data.comment_id
                             no_of_like = data.no_of_like
+                        DEFAULT_VALUE = 0
                         if no_of_like is None:
                             no_of_like = DEFAULT_VALUE
                         print("comment id is ", comment_id)
@@ -110,7 +111,7 @@ def comment_like(request):
                         for data in comment_update:
                             comment_id = data.comment_id
                             no_of_like = data.no_of_like
-
+                        DEFAULT_VALUE = 0
                         if no_of_like is None:
                             no_of_like = DEFAULT_VALUE
                         print("comment id is ", comment_id)
