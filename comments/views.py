@@ -67,7 +67,6 @@ def show_post_comment(request):
 
 @login_required(login_url='/login/login')
 def comment_like(request):
-    # print("comment_like----")
     if request.method == 'POST':
         user_id = request.user.id
         comment_id = request.POST['comment_id']
@@ -78,12 +77,10 @@ def comment_like(request):
             for i in range(0, len(postComments)):
                 if int(comment_id) == postComments[i].comment_id:
                     if like.objects.filter(user=user_id, comment_id=int(comment_id)).exists():
-                        # postobject = post.objects.get(id = post_id)
                         for comment_data in postComments:
                             if comment_data.comment_id == int(comment_id):
                                 for like_data in comment_data.likes:
                                     if like_data.user.id == int(user_id):
-                                        print("last stage in delete like comment")
                                         comment_data.likes.pop(comment_data.likes.index(like_data))
 
                         postData.save()
@@ -97,8 +94,6 @@ def comment_like(request):
                         DEFAULT_VALUE = 0
                         if no_of_like is None:
                             no_of_like = DEFAULT_VALUE
-                        print("comment id is ", comment_id)
-                        print("no of like  is ", no_of_like)
 
                        	no_of_like = no_of_like - 1
                         comment.objects.filter(comment_id=comment_id).update(no_of_like=no_of_like)
@@ -114,8 +109,6 @@ def comment_like(request):
                         DEFAULT_VALUE = 0
                         if no_of_like is None:
                             no_of_like = DEFAULT_VALUE
-                        print("comment id is ", comment_id)
-                        print("no of like  is ", no_of_like)
                         no_of_like = no_of_like + 1
                         comment.objects.filter(comment_id=comment_id).update(no_of_like=no_of_like)
 
