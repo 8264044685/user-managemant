@@ -94,9 +94,12 @@ def comment_like(request):
                         for data in comment_update:
                             comment_id = data.comment_id
                             no_of_like = data.no_of_like
+                        if no_of_like is None:
+                            no_of_like = DEFAULT_VALUE
                         print("comment id is ", comment_id)
                         print("no of like  is ", no_of_like)
-                        no_of_like = no_of_like - 1
+
+                       	no_of_like = no_of_like - 1
                         comment.objects.filter(comment_id=comment_id).update(no_of_like=no_of_like)
 
                         return HttpResponse(str(no_of_like))
@@ -107,6 +110,9 @@ def comment_like(request):
                         for data in comment_update:
                             comment_id = data.comment_id
                             no_of_like = data.no_of_like
+
+                        if no_of_like is None:
+                            no_of_like = DEFAULT_VALUE
                         print("comment id is ", comment_id)
                         print("no of like  is ", no_of_like)
                         no_of_like = no_of_like + 1
