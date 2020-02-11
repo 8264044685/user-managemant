@@ -89,4 +89,3 @@ def reset_password_view(request):
     else:
         # messages.info(request, "Please enter email")
         return render(request, 'login/reset_password.html')
-
